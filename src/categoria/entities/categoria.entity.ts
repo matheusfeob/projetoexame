@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Quarto } from "src/quarto/entities/quarto.entity";
+import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Categoria {
@@ -7,4 +8,8 @@ export class Categoria {
 
     @Column()
     description: string;
+
+    @OneToOne(type => Quarto, quarto => quarto.categoria)
+    @JoinColumn()
+    quarto: Quarto;
 }

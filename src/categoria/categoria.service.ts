@@ -9,26 +9,26 @@ import { Categoria } from './entities/categoria.entity';
 export class CategoriaService {
   constructor(
     @InjectRepository(Categoria)
-    private createRepository: Repository<Categoria>,
+    private categoriaRepository: Repository<Categoria>,
   ) {}
 
-  create(createCategoriaDto: CreateCategoriaDto) {
-    return 'This action adds a new categoria';
+  create(categoria: Categoria): Promise<Categoria> {
+    return this.categoriaRepository.save(categoria);
+  }
+
+  findOne(id: number): Promise<Categoria> {
+    return this.categoriaRepository.findOne(+id);
   }
 
   findAll() {
-    return `This action returns all categoria`;
+    return this.categoriaRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} categoria`;
-  }
-
-  update(id: number, updateCategoriaDto: UpdateCategoriaDto) {
-    return `This action updates a #${id} categoria`;
+  update(id: number, categoria: Categoria) {
+    return this.categoriaRepository.update(+id, categoria);
   }
 
   remove(id: number) {
-    return `This action removes a #${id} categoria`;
+    return this.categoriaRepository.delete(+id);
   }
 }

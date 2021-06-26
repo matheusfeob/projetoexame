@@ -1,4 +1,6 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Quarto } from "src/quarto/entities/quarto.entity";
+import { Hospede } from "src/Hospede/entities/hospede.entity";
+import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Reserva {
@@ -14,6 +16,11 @@ export class Reserva {
     @Column()
     reserved: boolean;
 
-    @Column()
-    hospede: number;
+    @OneToOne(type => Hospede, hospede => hospede.reserva)
+    @JoinColumn()
+    hospede: Hospede;
+
+    @OneToOne(type => Quarto, quarto => quarto.reserva)
+    @JoinColumn()
+    quarto: Quarto;
 }

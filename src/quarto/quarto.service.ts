@@ -9,26 +9,26 @@ import { Quarto } from './entities/quarto.entity';
 export class QuartoService {
   constructor(
     @InjectRepository(Quarto)
-    private createRepository: Repository<Quarto>,
+    private quartoRepository: Repository<Quarto>,
   ) {}
 
-  create(createQuartoDto: CreateQuartoDto) {
-    return 'This action adds a new quarto';
+  create(quarto: Quarto): Promise<Quarto> {
+    return this.quartoRepository.save(quarto);
+  }
+
+  findOne(id: number): Promise<Quarto> {
+    return this.quartoRepository.findOne(+id);
   }
 
   findAll() {
-    return `This action returns all quarto`;
+    return this.quartoRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} quarto`;
-  }
-
-  update(id: number, updateQuartoDto: UpdateQuartoDto) {
-    return `This action updates a #${id} quarto`;
+  update(id: number, quarto: Quarto) {
+    return this.quartoRepository.update(+id, quarto);
   }
 
   remove(id: number) {
-    return `This action removes a #${id} quarto`;
+    return this.quartoRepository.delete(+id);
   }
 }

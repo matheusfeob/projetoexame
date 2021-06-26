@@ -9,26 +9,26 @@ import { Reserva } from './entities/reserva.entity';
 export class ReservaService {
   constructor(
     @InjectRepository(Reserva)
-    private createRepository: Repository<Reserva>,
+    private reservaRepository: Repository<Reserva>,
   ) {}
 
-  create(createReservaDto: CreateReservaDto) {
-    return 'This action adds a new reserva';
+  create(reserva: Reserva): Promise<Reserva> {
+    return this.reservaRepository.save(reserva);
+  }
+
+  findOne(id: number): Promise<Reserva> {
+    return this.reservaRepository.findOne(+id);
   }
 
   findAll() {
-    return `This action returns all reserva`;
+    return this.reservaRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} reserva`;
-  }
-
-  update(id: number, updateReservaDto: UpdateReservaDto) {
-    return `This action updates a #${id} reserva`;
+  update(id: number, reserva: Reserva) {
+    return this.reservaRepository.update(+id, reserva);
   }
 
   remove(id: number) {
-    return `This action removes a #${id} reserva`;
+    return this.reservaRepository.delete(+id);
   }
 }

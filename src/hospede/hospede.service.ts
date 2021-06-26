@@ -12,23 +12,23 @@ export class HospedeService {
     private hospedeRepository: Repository<Hospede>,
   ) {}
 
-  create(createHospedeDto: CreateHospedeDto) {
-    return 'This action adds a new hospede';
+  create(hospede: Hospede): Promise<Hospede> {
+    return this.hospedeRepository.save(hospede);
+  }
+
+  findOne(id: number): Promise<Hospede> {
+    return this.hospedeRepository.findOne(+id);
   }
 
   findAll() {
-    return `This action returns all hospede`;
+    return this.hospedeRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} hospede`;
-  }
-
-  update(id: number, updateHospedeDto: UpdateHospedeDto) {
-    return `This action updates a #${id} hospede`;
+  update(id: number, hospede: Hospede) {
+    return this.hospedeRepository.update(+id, hospede);
   }
 
   remove(id: number) {
-    return `This action removes a #${id} hospede`;
+    return this.hospedeRepository.delete(+id);
   }
 }

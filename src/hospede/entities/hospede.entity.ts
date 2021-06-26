@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Reserva } from "src/reserva/entities/reserva.entity";
+import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Hospede {
@@ -19,4 +20,8 @@ export class Hospede {
 
     @Column()
     city: string;
+
+    @OneToOne(type => Reserva, reserva => reserva.hospede)
+    @JoinColumn()
+    reserva: Reserva;
 }
