@@ -2,14 +2,15 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { QuartoService } from './quarto.service';
 import { CreateQuartoDto } from './dto/create-quarto.dto';
 import { UpdateQuartoDto } from './dto/update-quarto.dto';
+import { Quarto } from './entities/quarto.entity';
 
 @Controller('quarto')
 export class QuartoController {
-  constructor(private readonly quartoService: QuartoController) {}
+  constructor(private readonly quartoService: QuartoService) {}
 
   @Post()
-  create(@Body() createQuartoDto: CreateQuartoDto) {
-    return this.quartoService.create(createQuartoDto);
+  create(@Body() quarto: Quarto) {
+    return this.quartoService.create(quarto);
   }
 
   @Get()
@@ -23,8 +24,8 @@ export class QuartoController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: number, @Body() updateQuartoDto: UpdateQuartoDto) {
-    return this.quartoService.update(+id, updateQuartoDto);
+  update(@Param('id') id: number, @Body() quarto: Quarto) {
+    return this.quartoService.update(+id, quarto);
   }
 
   @Delete(':id')

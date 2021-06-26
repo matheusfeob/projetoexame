@@ -2,14 +2,15 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { ReservaService } from './reserva.service';
 import { CreateReservaDto } from './dto/create-reserva.dto';
 import { UpdateReservaDto } from './dto/update-reserva.dto';
+import { Reserva } from './entities/reserva.entity';
 
 @Controller('reserva')
 export class ReservaController {
-  constructor(private readonly reservaService: ReservaController) {}
+  constructor(private readonly reservaService: ReservaService) {}
 
   @Post()
-  create(@Body() createReservaDto: CreateReservaDto) {
-    return this.reservaService.create(createReservaDto);
+  create(@Body() reserva: Reserva) {
+    return this.reservaService.create(reserva);
   }
 
   @Get()
@@ -23,8 +24,8 @@ export class ReservaController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: number, @Body() updateReservaDto: UpdateReservaDto) {
-    return this.reservaService.update(+id, updateReservaDto);
+  update(@Param('id') id: number, @Body() reserva: Reserva) {
+    return this.reservaService.update(+id, reserva);
   }
 
   @Delete(':id')

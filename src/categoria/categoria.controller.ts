@@ -2,14 +2,15 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { CategoriaService } from './categoria.service';
 import { CreateCategoriaDto } from './dto/create-categoria.dto';
 import { UpdateCategoriaDto } from './dto/update-categoria.dto';
+import { Categoria } from './entities/categoria.entity';
 
 @Controller('categoria')
 export class CategoriaController {
-  constructor(private readonly categoriaService: CategoriaController) {}
+  constructor(private readonly categoriaService: CategoriaService) {}
 
   @Post()
-  create(@Body() createCategoriaDto: CreateCategoriaDto) {
-    return this.categoriaService.create(createCategoriaDto);
+  create(@Body() categoria: Categoria) {
+    return this.categoriaService.create(categoria);
   }
 
   @Get()
@@ -23,8 +24,8 @@ export class CategoriaController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: number, @Body() updateCategoriaDto: UpdateCategoriaDto) {
-    return this.categoriaService.update(+id, updateCategoriaDto);
+  update(@Param('id') id: number, @Body() categoria: Categoria) {
+    return this.categoriaService.update(+id, categoria);
   }
 
   @Delete(':id')

@@ -1,5 +1,5 @@
 import { Quarto } from "src/quarto/entities/quarto.entity";
-import { Hospede } from "src/Hospede/entities/hospede.entity";
+import { Hospede } from "src/hospede/entities/hospede.entity";
 import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()

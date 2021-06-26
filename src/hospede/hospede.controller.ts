@@ -2,14 +2,15 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { HospedeService } from './hospede.service';
 import { CreateHospedeDto } from './dto/create-hospede.dto';
 import { UpdateHospedeDto } from './dto/update-hospede.dto';
+import { Hospede } from './entities/hospede.entity';
 
 @Controller('hospede')
 export class HospedeController {
-  constructor(private readonly hospedeService: HospedeController) {}
+  constructor(private readonly hospedeService: HospedeService) {}
 
   @Post()
-  create(@Body() createHospedeDto: CreateHospedeDto) {
-    return this.hospedeService.create(createHospedeDto);
+  create(@Body() hospede: Hospede) {
+    return this.hospedeService.create(hospede);
   }
 
   @Get()
@@ -23,8 +24,8 @@ export class HospedeController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: number, @Body() updateHospedeDto: UpdateHospedeDto) {
-    return this.hospedeService.update(+id, updateHospedeDto);
+  update(@Param('id') id: number, @Body() hospede: Hospede) {
+    return this.hospedeService.update(+id, hospede);
   }
 
   @Delete(':id')
