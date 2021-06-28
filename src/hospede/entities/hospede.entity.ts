@@ -22,6 +22,5 @@ export class Hospede {
     city: string;
 
     @OneToOne(type => Reserva, reserva => reserva.hospede)
-    @JoinColumn()
     reserva: Reserva;
 }

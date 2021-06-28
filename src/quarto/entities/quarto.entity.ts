@@ -11,7 +11,6 @@ export class Quarto {
     description: string;
 
     @OneToOne(type => Reserva, reserva => reserva.quarto)
-    @JoinColumn()
     reserva: Reserva;
 
     @OneToOne(type => Categoria, categoria => categoria.quarto)
